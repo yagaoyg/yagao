@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@vueuse/core": "^11.0.3",
+    "bootstrap": "^5.3.3",
+    "element-plus": "^2.8.1",
+    "less": "^4.2.0",
+    "less-loader": "^12.2.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"

@@ -12,5 +12,16 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      // 将less变量引入全局
+      less: {
+        modifyVars: {
+          hack: 'true; @import "@/assets/styles/var.less";',
+        },
+        javascriptEnabled: true,
+      },
+    },
+  },
 })

@@ -13,7 +13,11 @@
 <style scoped lang="less">
 .footer-content {
   height: 50px;
-  background-color: @maincolor;
+  // background-image: url(@/assets/images/大图背景.jpg);
+  // background-attachment: fixed;
+  // background-color: rgba(255, 255, 255, 0.2);
+  // backdrop-filter: blur(10px);
+  background-color: #333;
   color: @wtext;
   text-align: center;
   line-height: 50px;

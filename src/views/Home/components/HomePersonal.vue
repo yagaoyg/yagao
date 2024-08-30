@@ -1,36 +1,38 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useIntersectionObserver } from '@vueuse/core'
+// import { ref, watch } from 'vue'
+// import { useIntersectionObserver } from '@vueuse/core'
 
-const mask = ref(null)
-const maskIsVisible = ref(false)
+// const mask = ref(null)
+// const maskIsVisible = ref(false)
 
-// eslint-disable-next-line no-unused-vars
-const { stop } = useIntersectionObserver(
-  mask,
-  ([{ isIntersecting }]) => {
-    maskIsVisible.value = isIntersecting
-  },
-)
+// // eslint-disable-next-line no-unused-vars
+// const { stop } = useIntersectionObserver(
+//   mask,
+//   ([{ isIntersecting }]) => {
+//     maskIsVisible.value = isIntersecting
+//   },
+// )
 
-watch(maskIsVisible, () => {
-  if (maskIsVisible.value) {
-    window.scrollTo({
-      top: mask.value.offsetTop,
-      behavior: 'smooth',
-    })
-  }
-})
+// watch(maskIsVisible, () => {
+//   if (maskIsVisible.value) {
+//     window.scrollTo({
+//       top: mask.value.offsetTop,
+//       behavior: 'smooth',
+//     })
+//     // stop()
+//   }
+// })
 
 </script>
 
 <template>
   <div class="person-content">
-    <div class="mask" ref="mask">
+    <div class="mask">
       <div class="container">
+        <!-- <h3>关于我</h3> -->
         <ul>
           <li>
-            <a href="https://space.bilibili.com/3094069?spm_id_from=333.1007.0.0" target="_blank">
+            <a href="https://space.bilibili.com/3094069" target="_blank">
               <el-avatar :size="180" class="avatar"> <i class="iconfont icon-icon_bilibili-circle"></i> </el-avatar>
               <div class="text">YAGAO 的BILI主页</div>
               <i class="iconfont icon-arrow-right"></i>
@@ -60,7 +62,7 @@ watch(maskIsVisible, () => {
 .person-content {
   width: 100%;
   height: 800px;
-  background-image: url(@/assets/images/大图背景.jpg);
+  background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -139,6 +141,7 @@ watch(maskIsVisible, () => {
 
         li:nth-child(2) {
           background-color: #1b2838;
+          color: #1b2838;
 
           a {
             color: @wtext;

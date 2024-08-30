@@ -8,6 +8,9 @@
       <h2>WELCOME!</h2>
       <p>欢迎来到 YAGAO 的主页</p>
     </div>
+    <div class="down">
+      <i class="iconfont icon-direction-down"></i>
+    </div>
   </div>
 </template>
 
@@ -16,7 +19,7 @@
   position: relative;
   width: 100%;
   height: 760px;
-  background-image: url(@/assets/images/大图背景.jpg);
+  background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -56,6 +59,19 @@
     }
   }
 
+  .down {
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.8);
+    animation: arrow 1.5s infinite alternate;
+
+    i {
+      font-size: 80px;
+    }
+  }
+
 }
 
 @keyframes imgload {
@@ -65,6 +81,16 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes arrow {
+  from {
+    transform: translate(-50%, -50%);
+  }
+
+  to {
+    transform: translate(-50%, -80%);
   }
 }
 </style>

@@ -43,7 +43,7 @@
     // border: 1px solid #000;
     border-radius: 10px;
 
-    animation: imgload 1.5s forwards;
+    animation: imgload 1.2s forwards;
 
     h2 {
       font-size: 120px;

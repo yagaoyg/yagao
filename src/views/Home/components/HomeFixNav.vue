@@ -47,10 +47,10 @@ watch(y, () => {
   width: 100%;
   height: 40px;
   // background-color: #333;
-  background-image: url(@back);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  // background-image: url(@back);
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-attachment: fixed;
 
   line-height: 1;
 

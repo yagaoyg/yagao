@@ -1,27 +1,4 @@
 <script setup>
-// import { ref, watch } from 'vue'
-// import { useIntersectionObserver } from '@vueuse/core'
-
-// const mask = ref(null)
-// const maskIsVisible = ref(false)
-
-// // eslint-disable-next-line no-unused-vars
-// const { stop } = useIntersectionObserver(
-//   mask,
-//   ([{ isIntersecting }]) => {
-//     maskIsVisible.value = isIntersecting
-//   },
-// )
-
-// watch(maskIsVisible, () => {
-//   if (maskIsVisible.value) {
-//     window.scrollTo({
-//       top: mask.value.offsetTop,
-//       behavior: 'smooth',
-//     })
-//     // stop()
-//   }
-// })
 
 </script>
 
@@ -61,7 +38,7 @@
 <style scoped lang="less">
 .person-content {
   width: 100%;
-  height: 800px;
+  height: @window-height;
   background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;
@@ -105,9 +82,9 @@
             color: @maincolor;
             font-size: 22px;
 
-            &:hover {
-              cursor: default;
-            }
+            // &:hover {
+            //   cursor: default;
+            // }
 
             .avatar {
               margin: 60px ((250px - 180px)/2px) 40px;

@@ -18,7 +18,7 @@
 .img-content {
   position: relative;
   width: 100%;
-  height: 760px;
+  height: @window-height;
   background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;

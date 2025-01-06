@@ -40,7 +40,7 @@ watch(y, () => {
 <style scoped lang="less">
 .fix-content {
   position: fixed;
-  // top: -100%;
+  top: -100%;
   // top: -20px;
   z-index: 1000;
 

@@ -10,7 +10,7 @@ const songs = ref([
   'so far away',
   'カタオモイ-Aimer#gfokU'
 ])
-const currTime = 0
+// const currTime = 0
 
 const changeVolume = (vol = 0.6) => {
   audio.value.volume = vol
@@ -46,8 +46,8 @@ onMounted(() => {
       <img src="@/assets/images/default.png" alt="">
     </div>
     <div class="muise-info">
-      <div class="title">标题施工中</div>
-      <div class="singer">作者施工中</div>
+      <div class="title">Track in Time</div>
+      <div class="singer">Reach Me</div>
     </div>
     <div class="muise-control">
       <!-- 喜欢 -->

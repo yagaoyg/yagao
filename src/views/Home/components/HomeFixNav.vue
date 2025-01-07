@@ -26,7 +26,7 @@ watch(y, () => {
             <RouterLink to="/"><i class="iconfont icon-home"></i>首页</RouterLink>
           </li>
           <li>
-            <RouterLink to="/"><i class="iconfont icon-error"></i>施工中</RouterLink>
+            <a href="http://shop.xduyg.top" target="_blank"><i class="iconfont icon-icon-test"></i>小兔鲜电商</a>
           </li>
           <li>
             <RouterLink to="/"><i class="iconfont icon-error"></i>施工中</RouterLink>

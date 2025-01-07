@@ -8,33 +8,74 @@ const songs = ref([
   'Reach Me - Track in Time',
   'ALisa - Lauv-I Like Me Closer (Remix)',
   'so far away',
-  'カタオモイ-Aimer#gfokU'
+  '4'
 ])
-// const currTime = 0
+const currTime = ref(0)
+const currSong = ref(0)
 
+// 音量控制
 const changeVolume = (vol = 0.6) => {
   audio.value.volume = vol
 }
+
+// 切换音乐
 const changeMusic = (index = 0) => {
-  audioSrc.value.src = `src/assets/audio/${songs.value[index]}.mp3`
+  audio.value.src = `src/assets/audio/${songs.value[index]}.mp3`
+  console.log(`现在播放${songs.value[index]}`)
 }
+
+// 播放音乐
+const play = () => {
+  audio.value.play()
+  console.log(audio.value.paused)
+  // console.log(`play ${audioSrc.value.src}`)
+  playIcon.value.innerHTML = '<i class="iconfont icon-pause" style="font-size:30px"></i>'
+}
+
+// 暂停音乐
+const pause = () => {
+  audio.value.pause()
+  console.log(audio.value.paused)
+  playIcon.value.innerHTML = '<i class="iconfont icon-caret-right" style="font-size:30px"></i>'
+}
+
+// 播放暂停处理 
 const playHanndler = () => {
   if (audio.value.paused) {
-    audio.value.play()
-    console.log(audio.value.paused)
-    // console.log(`play ${audioSrc.value.src}`)
-    playIcon.value.innerHTML = '<i class="iconfont icon-pause" style="font-size:30px"></i>'
+    play()
   } else {
-    audio.value.pause()
-    console.log(audio.value.paused)
-    playIcon.value.innerHTML = '<i class="iconfont icon-caret-right" style="font-size:30px"></i>'
+    pause()
   }
 }
 
+// 上一首音乐
+const prevSong = async () => {
+  if (currSong.value === 0) {
+    currSong.value = songs.value.length - 1
+  } else {
+    currSong.value--
+  }
+  await changeMusic(currSong.value)
+  play()
+}
+
+// 下一首音乐
+const nextSong = async () => {
+  if (currSong.value === songs.value.length - 1) {
+    currSong.value = 0
+  } else {
+    currSong.value++
+  }
+  await changeMusic(currSong.value)
+  play()
+}
+
 onMounted(() => {
+  // 初始音量0.6
   changeVolume()
-  changeMusic()
-  console.log(audioSrc.value.src)
+  // 默认播放
+  changeMusic(currSong.value)
+  // console.log(audioSrc.value.src)
   // console.log(audio.value.volume)
 })
 
@@ -66,13 +107,13 @@ onMounted(() => {
 
       <!-- 播放控件 -->
       <div class="play-control">
-        <div class="back">
+        <div class="prev" @click=prevSong(currSong)>
           <i class="iconfont icon-step-backward"></i>
         </div>
         <div class="play" @click="playHanndler" ref="playIcon">
           <i class="iconfont icon-caret-right"></i>
         </div>
-        <div class="next">
+        <div class="next" @click="nextSong(currSong)">
           <i class="iconfont icon-step-forward"></i>
         </div>
       </div>
@@ -80,8 +121,8 @@ onMounted(() => {
     <div class="muise-bar">
       <span class="currtime">00:00</span>
       <input type="range" class="bar" value="0" step="1" min="0" max="100">
-      <audio class="muise" ref="audio">
-        <source src="@/assets/audio/Reach Me - Track in Time.mp3" ref="audioSrc">
+      <audio class="muise" ref="audio" src="@/assets/audio/Reach Me - Track in Time.mp3">
+        <!-- <source src="@/assets/audio/Reach Me - Track in Time.mp3" ref="audioSrc"> -->
       </audio>
       <span class="duration">88:88</span>
     </div>

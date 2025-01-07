@@ -1,17 +1,58 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
-const audio = ref()
-const audioSrc = ref()
-const playIcon = ref()
+const audio = ref(null)
+// const audioSrc = ref()
+const playIcon = ref(null)
+const bar = ref(null)
 const songs = ref([
   'Reach Me - Track in Time',
   'ALisa - Lauv-I Like Me Closer (Remix)',
   'so far away',
   '4'
 ])
-const currTime = ref(0)
+
 const currSong = ref(0)
+const currTime = ref(0)
+const currMin = ref(0)
+const currSec = ref(0)
+const songTime = ref(0)
+const songMin = ref(0)
+const songSec = ref(0)
+
+// 补0函数
+const padZero = (num, n = 2) => {
+  let len = num.toString().length
+  while (len < n) {
+    num = '0' + num
+    len++
+  }
+  return num
+}
+
+// 获取音乐时长
+const getSongLen = () => {
+  songTime.value = audio.value.duration
+  console.dir(audio.value)
+  // console.dir(document.querySelector('.muise'))
+  console.log(songTime.value)
+  songMin.value = computed(() => padZero(parseInt(songTime.value / 60) % 60))
+  songSec.value = computed(() => padZero(parseInt(songTime.value % 60)))
+  reserBar()
+}
+
+// 获取当前播放时间
+const getCurrTime = () => {
+  currTime.value = audio.value.currentTime
+  currMin.value = computed(() => padZero(parseInt(currTime.value / 60) % 60))
+  currSec.value = computed(() => padZero(parseInt(currTime.value % 60)))
+}
+
+// 重置进度条
+const reserBar = () => {
+  bar.value.value = 0
+  bar.value.max = songTime.value
+}
 
 // 音量控制
 const changeVolume = (vol = 0.6) => {
@@ -19,7 +60,7 @@ const changeVolume = (vol = 0.6) => {
 }
 
 // 切换音乐
-const changeMusic = (index = 0) => {
+const changeSong = (index = 0) => {
   audio.value.src = `src/assets/audio/${songs.value[index]}.mp3`
   console.log(`现在播放${songs.value[index]}`)
 }
@@ -55,7 +96,7 @@ const prevSong = async () => {
   } else {
     currSong.value--
   }
-  await changeMusic(currSong.value)
+  await changeSong(currSong.value)
   play()
 }
 
@@ -66,7 +107,7 @@ const nextSong = async () => {
   } else {
     currSong.value++
   }
-  await changeMusic(currSong.value)
+  await changeSong(currSong.value)
   play()
 }
 
@@ -74,9 +115,8 @@ onMounted(() => {
   // 初始音量0.6
   changeVolume()
   // 默认播放
-  changeMusic(currSong.value)
-  // console.log(audioSrc.value.src)
-  // console.log(audio.value.volume)
+  changeSong(currSong.value)
+
 })
 
 </script>
@@ -119,12 +159,13 @@ onMounted(() => {
       </div>
     </div>
     <div class="muise-bar">
-      <span class="currtime">00:00</span>
-      <input type="range" class="bar" value="0" step="1" min="0" max="100">
-      <audio class="muise" ref="audio" src="@/assets/audio/Reach Me - Track in Time.mp3">
+      <span class="currtime">{{ currMin }}:{{ currSec }}</span>
+      <input type="range" class="bar" :value="currTime" step="1" min="0" max="100" ref="bar">
+      <audio class="muise" ref="audio" src="@/assets/audio/Reach Me - Track in Time.mp3" @canplay="getSongLen()"
+        @timeupdate="getCurrTime()">
         <!-- <source src="@/assets/audio/Reach Me - Track in Time.mp3" ref="audioSrc"> -->
       </audio>
-      <span class="duration">88:88</span>
+      <span class="duration">{{ songMin }}:{{ songSec }}</span>
     </div>
   </div>
 </template>
@@ -237,6 +278,12 @@ onMounted(() => {
 
       .iconfont {
         font-size: 20px;
+      }
+    }
+
+    .muise-bar {
+      .bar {
+        width: 800px;
       }
     }
   }

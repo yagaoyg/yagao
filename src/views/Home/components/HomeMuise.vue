@@ -33,9 +33,9 @@ const padZero = (num, n = 2) => {
 // 获取音乐时长
 const getSongLen = () => {
   songTime.value = audio.value.duration
-  console.dir(audio.value)
+  // console.dir(audio.value)
   // console.dir(document.querySelector('.muise'))
-  console.log(songTime.value)
+  // console.log(songTime.value)
   songMin.value = computed(() => padZero(parseInt(songTime.value / 60) % 60))
   songSec.value = computed(() => padZero(parseInt(songTime.value % 60)))
   reserBar()
@@ -44,8 +44,9 @@ const getSongLen = () => {
 // 获取当前播放时间
 const getCurrTime = () => {
   currTime.value = audio.value.currentTime
-  currMin.value = computed(() => padZero(parseInt(currTime.value / 60) % 60))
-  currSec.value = computed(() => padZero(parseInt(currTime.value % 60)))
+  currMin.value = padZero(parseInt(currTime.value / 60) % 60)
+  currSec.value = padZero(parseInt(currTime.value % 60))
+  // console.log(currTime.value)
 }
 
 // 重置进度条
@@ -55,7 +56,7 @@ const reserBar = () => {
 }
 
 // 音量控制
-const changeVolume = (vol = 0.6) => {
+const changeVolume = (vol = 0.5) => {
   audio.value.volume = vol
 }
 
@@ -111,8 +112,20 @@ const nextSong = async () => {
   play()
 }
 
+// 播放结束
+const songEnd = () => {
+  playIcon.value.innerHTML = '<i class="iconfont icon-caret-right" style="font-size:30px"></i>'
+}
+
+// 监听进度条
+const barChange = () => {
+  // 用audio不行 不知道为什么
+  document.querySelector('.muise').currentTime = bar.value.value
+}
+
+
 onMounted(() => {
-  // 初始音量0.6
+  // 初始音量0.5
   changeVolume()
   // 默认播放
   changeSong(currSong.value)
@@ -160,9 +173,9 @@ onMounted(() => {
     </div>
     <div class="muise-bar">
       <span class="currtime">{{ currMin }}:{{ currSec }}</span>
-      <input type="range" class="bar" :value="currTime" step="1" min="0" max="100" ref="bar">
+      <input type="range" class="bar" :value="currTime" step="1" min="0" max="100" ref="bar" @input="barChange()">
       <audio class="muise" ref="audio" src="@/assets/audio/Reach Me - Track in Time.mp3" @canplay="getSongLen()"
-        @timeupdate="getCurrTime()">
+        @timeupdate="getCurrTime()" @ended="songEnd()">
         <!-- <source src="@/assets/audio/Reach Me - Track in Time.mp3" ref="audioSrc"> -->
       </audio>
       <span class="duration">{{ songMin }}:{{ songSec }}</span>
@@ -178,7 +191,7 @@ onMounted(() => {
   height: 80px;
   border-radius: 10px;
   color: @btext;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
 
   .muise-img {
     width: 70px;
@@ -280,10 +293,54 @@ onMounted(() => {
         font-size: 20px;
       }
     }
+  }
 
-    .muise-bar {
-      .bar {
-        width: 800px;
+  .muise-bar {
+    margin-left: 45px;
+
+    .currtime {
+      margin-right: 15px;
+    }
+
+    .duration {
+      margin-left: 15px;
+    }
+
+    input[type=range] {
+      position: relative;
+      bottom: 3px;
+      -webkit-appearance: none;
+      margin: 0;
+      padding: 0;
+      width: 600px;
+      height: 6px;
+      outline: none;
+      overflow: hidden;
+      border-radius: 3px;
+
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 6px;
+        height: 6px;
+        background-color: rgb(32, 164, 204);
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: -100vw 0 0 100vw rgb(61, 91, 100);
+      }
+
+      &::-moz-range-thumb {
+        -webkit-appearance: none;
+        width: 8px;
+        height: 8px;
+        background-color: rgb(32, 164, 204);
+      }
+
+      &::-ms-thumb {
+        -webkit-appearance: none;
+        width: 8px;
+        height: 8px;
+        background-color: rgb(32, 164, 204);
+        border-radius: 100%;
       }
     }
   }

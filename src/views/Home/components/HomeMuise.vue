@@ -65,7 +65,7 @@ const changeVolume = (vol = 0.5) => {
 
 // 切换音乐
 const changeSong = (index = 0) => {
-  audio.value.src = `src/assets/audio/${songs.value[index]}.mp3`
+  audio.value.src = `/audio/${songs.value[index]}.mp3`
   console.log(`现在播放${songs.value[index]}`)
   getSongInfo(index)
 }
@@ -131,7 +131,7 @@ const barChange = () => {
 const getSongInfo = (index) => {
   title.value.innerHTML = songs.value[index].split('-')[1]
   singer.value.innerHTML = songs.value[index].split('-')[0]
-  songImg.value.src = `src/assets/images/songs/${songs.value[index]}.png`
+  songImg.value.src = `/images/songs/${songs.value[index]}.png`
 }
 
 
@@ -140,7 +140,6 @@ onMounted(() => {
   changeVolume()
   // 默认播放
   changeSong(currSong.value)
-
 })
 
 </script>
@@ -185,7 +184,7 @@ onMounted(() => {
     <div class="muise-bar">
       <span class="currtime">{{ currMin }}:{{ currSec }}</span>
       <input type="range" class="bar" :value="currTime" step="1" min="0" max="100" ref="bar" @input="barChange()">
-      <audio class="muise" ref="audio" src="@/assets/audio/Reach Me - Track in Time.mp3" @canplay="getSongLen()"
+      <audio class="muise" ref="audio" src="/audio/Reach Me - Track in Time.mp3" @canplay="getSongLen()"
         @timeupdate="getCurrTime()" @ended="songEnd()">
         <!-- <source src="@/assets/audio/Reach Me - Track in Time.mp3" ref="audioSrc"> -->
       </audio>

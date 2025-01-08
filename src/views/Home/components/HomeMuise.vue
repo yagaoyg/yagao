@@ -5,11 +5,14 @@ const audio = ref(null)
 // const audioSrc = ref()
 const playIcon = ref(null)
 const bar = ref(null)
+const title = ref(null)
+const singer = ref(null)
+const songImg = ref(null)
 const songs = ref([
-  'Reach Me - Track in Time',
-  'ALisa - Lauv-I Like Me Closer (Remix)',
-  'so far away',
-  '4'
+  'Reach Me-Track in Time',
+  'ALisa-Lauv I Like Me Closer (Remix)',
+  // 'so far away',
+  // '4'
 ])
 
 const currSong = ref(0)
@@ -64,6 +67,7 @@ const changeVolume = (vol = 0.5) => {
 const changeSong = (index = 0) => {
   audio.value.src = `src/assets/audio/${songs.value[index]}.mp3`
   console.log(`现在播放${songs.value[index]}`)
+  getSongInfo(index)
 }
 
 // 播放音乐
@@ -123,6 +127,13 @@ const barChange = () => {
   document.querySelector('.muise').currentTime = bar.value.value
 }
 
+// 获取歌曲信息（名称/作者/封面）
+const getSongInfo = (index) => {
+  title.value.innerHTML = songs.value[index].split('-')[1]
+  singer.value.innerHTML = songs.value[index].split('-')[0]
+  songImg.value.src = `src/assets/images/songs/${songs.value[index]}.png`
+}
+
 
 onMounted(() => {
   // 初始音量0.5
@@ -137,11 +148,11 @@ onMounted(() => {
 <template>
   <div class="muise-content">
     <div class="muise-img">
-      <img src="@/assets/images/default.png" alt="">
+      <img src="@/assets/images/default.png" alt="" ref="songImg">
     </div>
     <div class="muise-info">
-      <div class="title">Track in Time</div>
-      <div class="singer">Reach Me</div>
+      <div class="title" ref="title">Track in Time</div>
+      <div class="singer" ref="singer">Reach Me</div>
     </div>
     <div class="muise-control">
       <!-- 喜欢 -->
@@ -206,6 +217,7 @@ onMounted(() => {
   }
 
   .muise-info {
+    width: 200px;
     margin-left: 40px;
     margin-right: 40px;
     text-align: center;
@@ -312,7 +324,7 @@ onMounted(() => {
       -webkit-appearance: none;
       margin: 0;
       padding: 0;
-      width: 600px;
+      width: 520px;
       height: 6px;
       outline: none;
       overflow: hidden;

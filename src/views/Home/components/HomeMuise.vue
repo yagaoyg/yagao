@@ -13,7 +13,7 @@ const songs = ref([
   'Reach Me-Track in Time',
   'ALisa-Lauv I Like Me Closer (Remix)',
   'park bird-Are You Lost',
-  'カタオモイ-Aimer'
+  'Aimer-カタオモイ'
 ])
 
 const currSong = ref(0)

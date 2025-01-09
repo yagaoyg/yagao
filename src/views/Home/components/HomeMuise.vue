@@ -12,8 +12,8 @@ const volBar = ref(null)
 const songs = ref([
   'Reach Me-Track in Time',
   'ALisa-Lauv I Like Me Closer (Remix)',
-  // 'so far away',
-  // '4'
+  'park bird-Are You Lost',
+  'カタオモイ-Aimer'
 ])
 
 const currSong = ref(0)
@@ -75,7 +75,7 @@ const changeSong = (index = 0) => {
 // 播放音乐
 const play = () => {
   audio.value.play()
-  console.log(audio.value.paused)
+  // console.log(audio.value.paused)
   // console.log(`play ${audioSrc.value.src}`)
   playIcon.value.innerHTML = '<i class="iconfont icon-pause" style="font-size:30px"></i>'
 }
@@ -83,7 +83,7 @@ const play = () => {
 // 暂停音乐
 const pause = () => {
   audio.value.pause()
-  console.log(audio.value.paused)
+  // console.log(audio.value.paused)
   playIcon.value.innerHTML = '<i class="iconfont icon-caret-right" style="font-size:30px"></i>'
 }
 

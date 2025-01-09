@@ -8,6 +8,7 @@ const bar = ref(null)
 const title = ref(null)
 const singer = ref(null)
 const songImg = ref(null)
+const volBar = ref(null)
 const songs = ref([
   'Reach Me-Track in Time',
   'ALisa-Lauv I Like Me Closer (Remix)',
@@ -16,6 +17,7 @@ const songs = ref([
 ])
 
 const currSong = ref(0)
+const vol = ref(50)
 const currTime = ref(0)
 const currMin = ref(0)
 const currSec = ref(0)
@@ -59,8 +61,8 @@ const reserBar = () => {
 }
 
 // 音量控制
-const changeVolume = (vol = 0.5) => {
-  audio.value.volume = vol
+const changeVolume = (vol = 50) => {
+  audio.value.volume = vol / 100
 }
 
 // 切换音乐
@@ -134,6 +136,24 @@ const getSongInfo = (index) => {
   songImg.value.src = `/images/songs/${songs.value[index]}.png`
 }
 
+// 点击音量按钮切换音量条显示
+const volumeBtn = () => {
+  const temp = document.querySelector('.volume-bar')
+  // console.log(temp.style.visibility)
+  if (temp.style.visibility === 'hidden') {
+    temp.style.visibility = 'visible'
+    document.querySelector('.vol').style.visibility = 'visible'
+  } else {
+    temp.style.visibility = 'hidden'
+    document.querySelector('.vol').style.visibility = 'hidden'
+  }
+}
+
+// 音量进度条控制音量
+const volBarChange = () => {
+  vol.value = volBar.value.value
+  changeVolume(vol.value)
+}
 
 onMounted(() => {
   // 初始音量0.5
@@ -160,12 +180,13 @@ onMounted(() => {
       </div> -->
       <!-- 音量 -->
       <div class="volume">
-        <i class="iconfont icon-yinliang"></i>
+        <i class="iconfont icon-yinliang" @click="volumeBtn()"></i>
         <div class="volume-bar">
-          <i class="iconfont icon-minus"></i>
-          <input type="range" value="0" step="1" min="0" max="100">
-          <i class="iconfont icon-add"></i>
+          <!-- <i class="iconfont icon-minus"></i> -->
+          <input type="range" name="volume" id="" min="0" max="100" ref="volBar" @input="volBarChange()">
+          <!-- <i class="iconfont icon-add"></i> -->
         </div>
+        <span class="vol">{{ vol }}</span>
       </div>
 
       <!-- 播放控件 -->
@@ -204,6 +225,7 @@ onMounted(() => {
   background-color: rgba(255, 255, 255, 0.8);
 
   .muise-img {
+    margin-left: 15px;
     width: 70px;
     height: 70px;
     border-radius: 10px;
@@ -267,27 +289,33 @@ onMounted(() => {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        top: -100%;
-        left: -80px;
+        top: 60%;
+        left: -75px;
         width: 180px;
         height: 30px;
         border-radius: 10px;
-        background-color: rgba(255, 255, 255, 0.2);
-        visibility: hidden;
+        // background-color: rgba(255, 255, 255, 0.2);
+        // visibility: hidden;
         // backdrop-filter: blur(10px);
 
         input[type="range"] {
           -webkit-appearance: none;
           appearance: none;
-          height: 5px;
+          margin: 0 auto;
+          width: 120px;
+          height: 6px;
+          border-radius: 3px;
+          cursor: pointer;
+          overflow: hidden;
 
           &::-webkit-slider-thumb {
             -webkit-appearance: none;
-            margin-top: 2px;
+            // margin-top: 2px;
             height: 8px;
             width: 8px;
             border-radius: 4px;
-            background-color: #d84040;
+            background-color: rgb(32, 164, 204);
+            box-shadow: -100vw 0 0 100vw rgb(61, 91, 100);
           }
 
           // &::-webkit-slider-runnable-track {
@@ -298,10 +326,27 @@ onMounted(() => {
           //   /* 圆角 */
           // }
         }
+
+
+      }
+
+      .icon-minus {
+        margin-right: 5px;
+      }
+
+      .icon-add {
+        margin-left: 5px;
       }
 
       .iconfont {
         font-size: 20px;
+      }
+
+      .vol {
+        position: absolute;
+        right: 4px;
+        bottom: 20px;
+        font-size: 12px;
       }
     }
   }
@@ -321,6 +366,7 @@ onMounted(() => {
       position: relative;
       bottom: 3px;
       -webkit-appearance: none;
+      appearance: none;
       margin: 0;
       padding: 0;
       width: 520px;
@@ -341,6 +387,7 @@ onMounted(() => {
 
       &::-moz-range-thumb {
         -webkit-appearance: none;
+        appearance: none;
         width: 8px;
         height: 8px;
         background-color: rgb(32, 164, 204);
@@ -348,6 +395,7 @@ onMounted(() => {
 
       &::-ms-thumb {
         -webkit-appearance: none;
+        appearance: none;
         width: 8px;
         height: 8px;
         background-color: rgb(32, 164, 204);

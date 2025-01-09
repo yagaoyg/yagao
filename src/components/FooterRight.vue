@@ -6,9 +6,15 @@
   <div class="footer-content">
     <div class="container">
       <div class="yg">Copyright © 2024 YAGAO 版权所有</div>
-      <div class="ba"><a href="https://beian.miit.gov.cn" target="_blank">
-          <!-- <img src="@/assets/images/备案.png" alt=""> -->
-          陕ICP备2023021393号-2</a></div>
+      <div class="babox">
+        <div class="ba"><a href="https://beian.miit.gov.cn" target="_blank">
+            陕ICP备2023021393号-2</a></div>
+        <div class="ba">
+          <img src="@/assets/images/备案图标.png" alt="">
+          <a href="https://beian.mps.gov.cn/#/query/webSearch?code=61019002003210" rel="noreferrer"
+            target="_blank">陕公网安备61019002003210号</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +36,12 @@
     height: 50px;
   }
 
+  .babox {
+    display: flex;
+  }
+
   .ba {
+    margin-right: 50px;
     height: 50px;
     background-color: #333;
 

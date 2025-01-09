@@ -295,7 +295,7 @@ onMounted(() => {
         height: 30px;
         border-radius: 10px;
         // background-color: rgba(255, 255, 255, 0.2);
-        // visibility: hidden;
+        visibility: hidden;
         // backdrop-filter: blur(10px);
 
         input[type="range"] {
@@ -347,6 +347,7 @@ onMounted(() => {
         right: 4px;
         bottom: 20px;
         font-size: 12px;
+        visibility: hidden;
       }
     }
   }

@@ -9,7 +9,7 @@ let timer = 0
 const textList = [
   'Welcome to my website!',
   'Life is simple.',
-  'I love JavaScript!',
+  // 'I love JavaScript!',
   'Click here to switch to next sentence.',
   'Are you lost?',
   'Thanks for your visit.',

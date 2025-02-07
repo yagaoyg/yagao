@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import HomeMuise from './HomeMuise.vue'
 import HomeText from './HomeText.vue'
+import HomeGame from './HomeGame.vue'
 
 const mydiv = ref(null)
 const divIsVisible = ref(false)
@@ -35,6 +36,7 @@ watch(divIsVisible, () => {
       <!-- 音乐组件 -->
       <HomeMuise />
       <!-- mini game -->
+      <HomeGame />
     </div>
   </div>
 </template>
@@ -42,7 +44,7 @@ watch(divIsVisible, () => {
 <style scoped lang="less">
 .info-content {
   width: 100%;
-  height: @window-height;
+  // height: 1400px;
   background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;

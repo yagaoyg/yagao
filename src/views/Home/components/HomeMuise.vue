@@ -9,6 +9,7 @@ const title = ref(null)
 const singer = ref(null)
 const songImg = ref(null)
 const volBar = ref(null)
+const autoIcon = ref(null)
 const songs = ref([
   'Reach Me-Track in Time',
   'ALisa-Lauv I Like Me Closer (Remix)',
@@ -24,6 +25,7 @@ const currSec = ref(0)
 const songTime = ref(0)
 const songMin = ref(0)
 const songSec = ref(0)
+const autoNext = ref(1)
 
 // 补0函数
 const padZero = (num, n = 2) => {
@@ -121,12 +123,15 @@ const nextSong = async () => {
 // 播放结束
 const songEnd = () => {
   playIcon.value.innerHTML = '<i class="iconfont icon-caret-right" style="font-size:30px"></i>'
+  if (autoNext.value === 1) nextSong()
+  else if (autoNext.value === 0) play()
 }
 
 // 监听进度条
 const barChange = () => {
   // 用audio不行 不知道为什么
   document.querySelector('.muise').currentTime = bar.value.value
+  play()
 }
 
 // 获取歌曲信息（名称/作者/封面）
@@ -153,6 +158,19 @@ const volumeBtn = () => {
 const volBarChange = () => {
   vol.value = volBar.value.value
   changeVolume(vol.value)
+}
+
+// 自动模式切换
+const autoModeChange = () => {
+  if (autoNext.value) {
+    autoNext.value = 0
+    autoIcon.value.classList.remove('icon-24gl-repeat2')
+    autoIcon.value.classList.add('icon-24gl-repeatOnce2')
+  } else {
+    autoNext.value = 1
+    autoIcon.value.classList.remove('icon-24gl-repeatOnce2')
+    autoIcon.value.classList.add('icon-24gl-repeat2')
+  }
 }
 
 onMounted(() => {
@@ -187,6 +205,11 @@ onMounted(() => {
           <!-- <i class="iconfont icon-add"></i> -->
         </div>
         <span class="vol">{{ vol }}</span>
+      </div>
+
+      <!-- 自动播放 -->
+      <div class="auto">
+        <i class="iconfont icon-24gl-repeat2" ref="autoIcon" @click="autoModeChange()"></i>
       </div>
 
       <!-- 播放控件 -->
@@ -283,6 +306,7 @@ onMounted(() => {
 
     .volume {
       position: relative;
+      // cursor: pointer;
 
       .volume-bar {
         position: absolute;
@@ -330,15 +354,16 @@ onMounted(() => {
 
       }
 
-      .icon-minus {
-        margin-right: 5px;
-      }
+      // .icon-minus {
+      //   margin-right: 5px;
+      // }
 
-      .icon-add {
-        margin-left: 5px;
-      }
+      // .icon-add {
+      //   margin-left: 5px;
+      // }
 
       .iconfont {
+        cursor: pointer;
         font-size: 20px;
       }
 
@@ -348,6 +373,13 @@ onMounted(() => {
         bottom: 20px;
         font-size: 12px;
         visibility: hidden;
+      }
+    }
+
+    .auto {
+
+      .iconfont {
+        font-size: 20px;
       }
     }
   }
@@ -375,6 +407,7 @@ onMounted(() => {
       outline: none;
       overflow: hidden;
       border-radius: 3px;
+      cursor: pointer;
 
       &::-webkit-slider-thumb {
         -webkit-appearance: none;

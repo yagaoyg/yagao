@@ -247,12 +247,14 @@ onMounted(() => {
   color: @btext;
   background-color: rgba(255, 255, 255, 0.8);
 
+
   .muise-img {
     margin-left: 15px;
     width: 70px;
     height: 70px;
     border-radius: 10px;
     overflow: hidden;
+    user-select: none;
 
     img {
       width: 100%;
@@ -386,6 +388,7 @@ onMounted(() => {
 
   .muise-bar {
     margin-left: 45px;
+    user-select: none;
 
     .currtime {
       margin-right: 15px;

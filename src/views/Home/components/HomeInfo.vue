@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import HomeMuise from './HomeMuise.vue'
+import HomeText from './HomeText.vue'
 
 const mydiv = ref(null)
 const divIsVisible = ref(false)
@@ -29,7 +30,11 @@ watch(divIsVisible, () => {
 <template>
   <div class="info-content" ref="mydiv">
     <div class="container">
+      <!-- 打字机名言 -->
+      <HomeText />
+      <!-- 音乐组件 -->
       <HomeMuise />
+      <!-- mini game -->
     </div>
   </div>
 </template>
@@ -46,7 +51,7 @@ watch(divIsVisible, () => {
   // background-color: rgba(255, 255, 255, 0.3);
 
   .container {
-    padding: 80px 0;
+    padding: 40px 0;
     height: 100%;
     // 布局临时用 布局完成后注释掉
     background-color: rgba(255, 255, 255, 0.3);

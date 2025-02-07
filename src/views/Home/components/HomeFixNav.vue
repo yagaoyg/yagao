@@ -29,6 +29,10 @@ watch(y, () => {
             <a href="http://shop.xduyg.top" target="_blank"><i class="iconfont icon-icon-test"></i>小兔鲜电商</a>
           </li>
           <li>
+            <a href="https://github.com/yagaoyg/yagao" target="_blank"><i
+                class="iconfont icon-GitHub"></i>本项目GitHub地址</a>
+          </li>
+          <li>
             <RouterLink to="/"><i class="iconfont icon-error"></i>施工中</RouterLink>
           </li>
         </ul>

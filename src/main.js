@@ -7,7 +7,7 @@ import '@/assets/styles/base.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'element-plus/dist/index.css'
 import './assets/styles/var.less'
-// import './assets/styles/mybase.less'
+import './assets/styles/mybase.less'
 
 import App from './App.vue'
 import router from './router'

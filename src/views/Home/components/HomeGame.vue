@@ -1,5 +1,5 @@
 <script setup>
-
+import Game2048 from '@/components/Game2048.vue'
 </script>
 
 <template>
@@ -7,7 +7,9 @@
     <el-row :gutter="20">
       <el-col :span="12">
         <!-- 2048 -->
-        <div class="2048-content game">2048</div>
+        <div class="2048-content game">
+          <Game2048 />>
+        </div>
       </el-col>
       <el-col :span="12">
         <!-- 扫雷 -->
@@ -29,8 +31,9 @@
 
   .game {
     margin: 10px 0;
-    height: 500px;
+    height: 700px;
     background-color: rgba(255, 255, 255, 0.8);
+    overflow: hidden;
     border-radius: 10px;
 
     color: @btext;

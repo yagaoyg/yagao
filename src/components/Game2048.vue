@@ -2,11 +2,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 
+const gameState = ref('ready')
 const matrix = ref([
-  [0, 2, 2, 0],
-  [0, 0, 2, 4],
-  [2, 4, 4, 4],
-  [2, 4, 4, 8]
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0]
 ])
 const row = matrix.value.length
 const col = matrix.value[0].length
@@ -96,7 +97,63 @@ const move = (direction) => {
     }
   } else {
     alert('方向无效')
+    return
   }
+  genNum()
+}
+
+// 得到没有数字的位置
+const getEmptyList = () => {
+  const emptyList = []
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      if (matrix.value[i][j] === 0) {
+        emptyList.push([i, j])
+      }
+    }
+  }
+  return emptyList
+}
+
+// 判断游戏是否结束
+const isGameOver = () => {
+  const emptyList = getEmptyList()
+  if (emptyList.length === 0) {
+    for (let i = 0; i < row - 1; i++) {
+      for (let j = 0; j < col - 1; j++) {
+        if (matrix.value[i][j] === matrix.value[i][j + 1] || matrix.value[i][j] === matrix.value[i + 1][j]) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+}
+
+// 生成数字
+const genNum = (num = 0) => {
+  if (isGameOver()) {
+    alert('游戏结束')
+    reset()
+    return
+  }
+  const emptyList = getEmptyList()
+  if (emptyList.length === 0) return
+  const randomIndex = Math.floor(Math.random() * emptyList.length)
+  const [row, col] = emptyList[randomIndex]
+  if (num === 0) matrix.value[row][col] = Math.random() > 0.4 ? 2 : 4
+  else matrix.value[row][col] = num
+}
+
+// 重置棋盘
+const reset = () => {
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      matrix.value[i][j] = 0
+    }
+  }
+  genNum(2)
+  genNum(2)
 }
 
 const pressToMove = (e) => {
@@ -107,8 +164,12 @@ const pressToMove = (e) => {
   else if (e.code === 'ArrowRight') move('right')
 }
 
+const gameOverHandler = () => {
+
+}
+
 onMounted(() => {
-  // move('up')
+  reset()
   // printMatrix()
 })
 
@@ -116,7 +177,7 @@ onMounted(() => {
 
 <template>
   <div class="content" @keydown.prevent="pressToMove" tabindex="-1">
-    <div class="title" @click="move('up')">2048</div>
+    <div class="title">2048</div>
     <div class="main">
       <div class="big">
         <!-- 得分 -->

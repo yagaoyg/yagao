@@ -11,11 +11,11 @@ const matrix = ref([
 const row = matrix.value.length
 const col = matrix.value[0].length
 
-const printMatrix = () => {
-  for (let i = 0; i < row; i++) {
-    console.log(`${i} | ${matrix.value[i].join(' ')}`)
-  }
-}
+// const printMatrix = () => {
+//   for (let i = 0; i < row; i++) {
+//     console.log(`${i} | ${matrix.value[i].join(' ')}`)
+//   }
+// }
 
 const cal = (i, j, direction) => {
   const next = getNextNonZero(i, j, direction)
@@ -99,15 +99,23 @@ const move = (direction) => {
   }
 }
 
+const pressToMove = (e) => {
+  // console.log(e.code)
+  if (e.code === 'ArrowUp') move('up')
+  else if (e.code === 'ArrowDown') move('down')
+  else if (e.code === 'ArrowLeft') move('left')
+  else if (e.code === 'ArrowRight') move('right')
+}
+
 onMounted(() => {
   // move('up')
-  printMatrix()
+  // printMatrix()
 })
 
 </script>
 
 <template>
-  <div class="content">
+  <div class="content" @keydown.prevent="pressToMove" tabindex="-1">
     <div class="title" @click="move('up')">2048</div>
     <div class="main">
       <div class="big">
@@ -211,7 +219,7 @@ onMounted(() => {
             font-size: 50px;
             color: @wtext;
 
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
           }
 
           .cell-0 {

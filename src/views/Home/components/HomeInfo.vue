@@ -56,7 +56,7 @@ watch(divIsVisible, () => {
     padding: 40px 0;
     height: 100%;
     // 布局临时用 布局完成后注释掉
-    background-color: rgba(255, 255, 255, 0.3);
+    // background-color: rgba(255, 255, 255, 0.3);
   }
 }
 </style>

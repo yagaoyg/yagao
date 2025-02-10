@@ -27,7 +27,7 @@ import Game2048 from '@/components/Game2048.vue'
 
 <style lang="less" scoped>
 .game-content {
-  margin-top: 50px;
+  margin-top: 30px;
 
   .game {
     margin: 10px 0;

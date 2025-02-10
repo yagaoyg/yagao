@@ -72,7 +72,7 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   width: 100%;
   height: 60px;
   border-radius: 30px;

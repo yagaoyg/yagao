@@ -434,6 +434,8 @@ onMounted(() => {
           font-size: 50px;
           text-align: center;
           line-height: 100px;
+
+          cursor: pointer;
         }
 
         .restart {

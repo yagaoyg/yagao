@@ -208,7 +208,7 @@ const topScoreInit = () => {
     localStorage.setItem('topScore', 0)
   }
   topScore.value = localStorage.getItem('topScore')
-  console.log(topScore.value)
+  // console.log(topScore.value)
 }
 
 // 回到小游戏首页
@@ -226,12 +226,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="content" @keydown.prevent="pressToMove" tabindex="-1">
+  <div class="content" @keydown.prevent="pressToMove" tabindex="-1" @contextmenu.prevent="">
     <div class="head">
       <div class="back"><i class="iconfont icon-home" @click="toReady()"></i></div>
       <div class="title">2048</div>
       <div class="reset"><i class="iconfont icon-zhongzhi" @click="reset()"></i></div>
     </div>
+    <div class="debug">使用方向键游玩</div>
     <div class="main">
       <div class="big">
         <!-- 得分 -->
@@ -292,6 +293,11 @@ onMounted(() => {
       color: @btext;
       cursor: pointer;
     }
+  }
+
+  .debug {
+    height: 34px;
+    text-align: center;
   }
 
   .main {

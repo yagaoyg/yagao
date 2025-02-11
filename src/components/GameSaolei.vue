@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
-import { get } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
+const debug = ref(false)
 const gameState = ref('ready')
 // -1表示地雷 -2表示未翻开 -3表示插旗 0表示翻开但无数字 1-8表示数字
 const matrix = ref([
@@ -17,20 +17,32 @@ const matrix = ref([
 ])
 const row = matrix.value.length
 const col = matrix.value[0].length
-// 地雷数量
-let bombNum = 10
 
-const printMatrix = () => {
-  for (let i = 0; i < row; i++) {
-    console.log(`${i} | ${matrix.value[i].join(' ')}`)
-  }
-}
+// 炸弹数量
+const bombNum = 10
+
+// 显示的炸弹数量
+const showBombNum = ref(bombNum)
+
+// 计时器标记
+let timer = null
+
+// 显示的用时
+const showTime = ref(0)
+
+// const printMatrix = () => {
+//   for (let i = 0; i < row; i++) {
+//     console.log(`${i} | ${matrix.value[i].join(' ')}`)
+//   }
+// }
 
 // 矩阵重置
 const resetMatrix = () => {
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
       matrix.value[i][j] = -2
+      document.querySelector(`.cell-${i}-${j}`).classList.add('hide')
+      document.querySelector(`.cell-${i}-${j}`).classList.remove('flag')
     }
   }
 }
@@ -58,7 +70,7 @@ const genBomb = () => {
   while (bombList.length < bombNum) {
     const index = Math.floor(Math.random() * emptyList.length)
     const [row, col] = emptyList[index]
-    if (bombList.find(item => item == [row, col])) continue
+    if (bombList.find(item => item.join() == [row, col].join())) continue
     else {
       bombList.push([row, col])
       matrix.value[row][col] = -1
@@ -107,29 +119,33 @@ const cal = () => {
   }
 }
 
-// 去除某一格的 hide 样式
+// 去除某一格的 hide 类
 const removeHide = (i, j) => {
   document.querySelector(`.cell-${i}-${j}`).classList.remove('hide')
 }
 
+// 去除某一格的 no-debug 类
+const removeNoDebug = (i, j) => {
+  document.querySelector(`.cell-${i}-${j}`).classList.remove('no-debug')
+}
 // 对这一格 从周围格列表中得到被隐藏的格子
 const getHideList = (i, j) => {
   const list = []
   const aroundList = getAroundList(i, j)
 
-  // console.log(document.querySelector(`.cell-${i}-${j}`).classList)
-  // console.log(document.querySelector(`.cell-${i}-${j}`).classList.contains('hide'))
-  // console.log(aroundList)
-
   aroundList.forEach(item => {
     // 检查此格上有没有 hide 类名
-    // console.log(document.querySelector(`.cell-${item[0]}-${item[1]}`).classList.contains('hide'))
     if (document.querySelector(`.cell-${item[0]}-${item[1]}`).classList.contains('hide')) {
       list.push(item)
     }
   })
-  // console.log(list)
   return list
+}
+
+// 去除类名处理
+const removeClass = (i, j) => {
+  removeHide(i, j)
+  if (!debug.value) removeNoDebug(i, j)
 }
 
 // 打开某一格
@@ -137,76 +153,148 @@ const open = (i, j) => {
   // 点到炸弹 游戏结束
   if (matrix.value[i][j] === -1) {
     // 处理逻辑
-    alert('游戏结束')
+    removeClass(i, j)
+    gameFail()
     return
   }
   // 点到非零格 去除此格的 hide 类名
   else if (matrix.value[i][j] !== 0) {
-    removeHide(i, j)
+    removeClass(i, j)
   }
   // 点到零格 打开此格 并打开周围的格子
   else if (matrix.value[i][j] === 0) {
-    removeHide(i, j)
+    removeClass(i, j)
     const hideList = getHideList(i, j)
     hideList.forEach(([i, j]) => {
       open(i, j)
     })
   }
+  // 判断是否胜利
+  if (isWin()) {
+    // 处理逻辑
+    gameWin()
+  }
 }
 
+// 回到小游戏首页
+const toReady = () => {
+  gameState.value = 'ready'
+  resetMatrix()
+}
+
+// 游戏失败处理
+const gameFail = () => {
+  clearInterval(timer)
+  setTimeout(() => {
+    gameState.value = 'gamefail'
+  }, 150)
+}
+
+// 游戏胜利判定
+const isWin = () => {
+  // 胜利条件：打开了除了炸弹的所有格子
+  // 思路：使用一个未隐藏格子列表 当此列表长度 = 所有格子数 - 炸弹数 时，游戏胜利
+  let openNum = 0
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      if (!document.querySelector(`.cell-${i}-${j}`).classList.contains('hide')) openNum++
+    }
+  }
+  if (openNum === row * col - bombNum) return true
+  else return false
+}
+
+// 游戏胜利处理
+const gameWin = () => {
+  clearInterval(timer)
+  setTimeout(() => {
+    gameState.value = 'gamewin'
+  }, 150)
+}
+
+// 插旗标记功能
+const flag = (i, j) => {
+  if (document.querySelector(`.cell-${i}-${j}`).classList.contains('hide')) {
+    if (document.querySelector(`.cell-${i}-${j}`).classList.contains('flag')) {
+      document.querySelector(`.cell-${i}-${j}`).classList.remove('flag')
+      showBombNum.value++
+    } else {
+      document.querySelector(`.cell-${i}-${j}`).classList.add('flag')
+      showBombNum.value--
+    }
+  }
+}
+
+const timerStart = () => {
+  showTime.value = 0
+  timer = setInterval(() => {
+    showTime.value++
+  }, 1000)
+}
 // 重置矩阵
 const reset = () => {
   // 1. 清零
   resetMatrix()
+  showBombNum.value = bombNum
+  if (timer) clearInterval(timer)
   // 2. 生成地雷
   genBomb()
   // 3. 计算每个格子的值
   cal()
+  // 4. 切换游戏状态
+  gameState.value = 'playing'
+  // 5. 打开计时器
+  timerStart()
 }
 
-
-
-onMounted(() => {
-  reset()
-  // printMatrix()
-
-})
+const switchDebug = () => {
+  debug.value = !debug.value
+}
 
 </script>
 
 <template>
-  <div class="content" @keydown.prevent="pressToMove" tabindex="-1">
+  <div class="content" @keydown.prevent="pressToMove" tabindex="-1" @contextmenu.prevent="">
     <div class="head">
       <div class="back"><i class="iconfont icon-home" @click="toReady()"></i></div>
       <div class="title">扫雷</div>
       <div class="reset"><i class="iconfont icon-zhongzhi" @click="reset()"></i></div>
     </div>
+    <div class="debug"><button @click="switchDebug()">调试模式</button>（调试模式下 点击所有数字以完成游戏）</div>
     <div class="main">
       <div class="big">
         <!-- 得分 -->
         <div class="score">
-          <div class="point">LEFT : <span class="now">{{ bombNum }}</span></div>
-          <div class="point">TIME : <span class="top">999</span></div>
+          <div class="point">BOMB : <span class="now">{{ showBombNum }}</span></div>
+          <div class="point">TIME : <span class="top">{{ showTime }}s</span></div>
         </div>
         <!-- 游戏区域 -->
         <div class="playing">
           <div class="my-row" v-for="(item, rowIndex) in matrix" :key="rowIndex">
-            <div class="cell hide" v-for="(i, colIndex) in item" :key="`${rowIndex}+${colIndex}`"
-              :class="`cell-${i} cell-${rowIndex}-${colIndex}`" @click="open(rowIndex, colIndex)">
-              {{ i !== 0 ? i : '' }}</div>
+            <div class="cell" v-for="(i, colIndex) in item" :key="`${rowIndex}+${colIndex}`"
+              :class="`cell-${i} cell-${rowIndex}-${colIndex} hide ${debug ? '' : 'no-debug'}`"
+              @click="open(rowIndex, colIndex)" @contextmenu="flag(rowIndex, colIndex)">
+              {{ i !== -1 ? i : '' }}</div>
           </div>
         </div>
-        <!-- <div class="mask" v-show="gameState === 'ready'">
+        <div class="mask" v-show="gameState === 'ready'">
           <div class="start my-btn" @click="reset()">
             开始游戏
           </div>
         </div>
-        <div class="mask" v-show="gameState === 'gameover'">
+        <div class="mask" v-show="gameState === 'gamefail'">
           <div class="msg">游戏结束</div>
           <div class="restart my-btn" @click="reset()">
             重新开始游戏
           </div>
-        </div> -->
+        </div>
+        <div class="mask" v-show="gameState === 'gamewin'">
+          <div class="msg">恭喜！</div>
+          <div class="msg">用时：{{ showTime }}s</div>
+          <div class="restart my-btn" @click="reset()">
+            重新开始游戏
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -240,6 +328,11 @@ onMounted(() => {
       color: @btext;
       cursor: pointer;
     }
+  }
+
+  .debug {
+    // height: 10px;
+    text-align: center;
   }
 
   .main {
@@ -308,61 +401,81 @@ onMounted(() => {
             font-size: 40px;
             color: @wtext;
 
-            transition: all 0.2s ease;
+            // transition: all 0.2s ease;
           }
 
           .hide {
+            background-color: #A78D74 !important;
+            // background-color: #A78D74;
+            // color: #A78D74 !important;
             border: blueviolet 2px solid;
           }
 
+          .no-debug {
+            color: #A78D74 !important;
+          }
+
           .cell-0 {
-            color: #fff;
-          }
-
-          .cell--1 {
-            background-color: #eee4da;
-            color: #776E65;
-          }
-
-          .cell--2 {
             background-color: #CDC1B4;
             color: #CDC1B4;
           }
 
-          .cell--3 {
-            background-color: #f2b179;
+          .cell--1 {
+            background-color: red;
+            // color: red;
+          }
+
+          .cell--2 {
+            background-color: #A78D74;
+            color: #A78D74;
           }
 
           .cell-1 {
-            background-color: #f59563;
+            background-color: #CDC1B4;
+            color: #1D16E6;
           }
 
           .cell-2 {
-            background-color: #f67c5f;
+            background-color: #CDC1B4;
+            color: #1B780B;
           }
 
           .cell-3 {
-            background-color: #f65e3b;
+            background-color: #CDC1B4;
+            color: #D40007;
           }
 
           .cell-4 {
-            background-color: #edcf72;
+            background-color: #CDC1B4;
+            color: #0E0678;
           }
 
           .cell-5 {
-            background-color: #edcc61;
+            background-color: #CDC1B4;
+            color: #660515;
           }
 
           .cell-6 {
-            background-color: #edc850;
+            background-color: #CDC1B4;
+            color: #037765;
           }
 
           .cell-7 {
-            background-color: #edc53f;
+            background-color: #CDC1B4;
+            color: #000000;
           }
 
           .cell-8 {
-            background-color: #edc22e;
+            background-color: #CDC1B4;
+            color: #808080;
+          }
+
+          .flag {
+
+            &::before {
+              content: '📍';
+              color: red;
+            }
           }
         }
       }
@@ -376,9 +489,10 @@ onMounted(() => {
         align-items: center;
         margin-top: 50px;
         width: 500px;
-        height: 500px;
+        height: 502px;
         background-color: rgba(186, 178, 171, 0.85);
         color: @wtext;
+        transition: all 0.3s ease;
 
         .my-btn {
           width: 300px;

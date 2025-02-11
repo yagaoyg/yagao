@@ -43,6 +43,7 @@ const resetMatrix = () => {
       matrix.value[i][j] = -2
       document.querySelector(`.cell-${i}-${j}`).classList.add('hide')
       document.querySelector(`.cell-${i}-${j}`).classList.remove('flag')
+      if (!debug.value) document.querySelector(`.cell-${i}-${j}`).classList.add('no-debug')
     }
   }
 }
@@ -180,6 +181,8 @@ const open = (i, j) => {
 const toReady = () => {
   gameState.value = 'ready'
   resetMatrix()
+  clearInterval(timer)
+  showTime.value = 0
 }
 
 // 游戏失败处理

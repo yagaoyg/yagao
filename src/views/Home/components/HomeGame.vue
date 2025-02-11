@@ -1,6 +1,7 @@
 <script setup>
 import Game2048 from '@/components/Game2048.vue'
 import GameSaolei from '@/components/GameSaolei.vue'
+import GameFanying from '@/components/GameFanying.vue'
 </script>
 
 <template>
@@ -22,7 +23,9 @@ import GameSaolei from '@/components/GameSaolei.vue'
     <el-row>
       <el-col :span="24">
         <!-- 反应力测试 -->
-        <div class="fanying game">反应力测试</div>
+        <div class="fanying game">
+          <GameFanying />
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -41,6 +44,10 @@ import GameSaolei from '@/components/GameSaolei.vue'
 
     color: @btext;
     font-size: 20px;
+  }
+
+  .fanying {
+    height: 500px;
   }
 }
 </style>

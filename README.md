@@ -1,35 +1,25 @@
-# yagao
+# 牙膏的个人网站项目
 
-This template should help get you started developing with Vue 3 in Vite.
+使用vue3+vite+vue-router+element-plus+bootstrap搭建
 
-## Recommended IDE Setup
+## 建议使用的开发软件
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+[VSCode](https://code.visualstudio.com/) 配合扩展使用
 
-## Customize configuration
+## 项目使用
+在 VSCode 中打开项目
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+### 项目开发
+在终端中先后输入以下命令 即可完成 npm 依赖包的安装和启动项目
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### 将此项目打包
+下面的命令会将此项目打包 生成 dist 文件夹
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

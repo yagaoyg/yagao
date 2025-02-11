@@ -330,23 +330,25 @@ onMounted(() => {
       .playing {
         display: flex;
         flex-direction: column;
-        padding-top: 10px;
-        padding-left: 10px;
+        justify-content: space-evenly;
+        // padding-top: 10px;
+        // padding-left: 10px;
         height: 500px;
 
         .my-row {
           display: flex;
-          margin-bottom: 10px;
+          justify-content: space-evenly;
+          // margin-bottom: 10px;
           // width: 492px;
           height: 120px;
           background-color: #BBADA0;
 
           .cell {
             // margin-bottom: 10px;
-            margin-right: 10px;
+            // margin-right: 10px;
             padding: 0;
-            width: 112.5px;
-            height: 112.5px;
+            width: 112px;
+            height: 112px;
 
             border-radius: 10px;
             background-color: #CDC1B4;

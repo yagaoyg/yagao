@@ -1,5 +1,6 @@
 <script setup>
 import Game2048 from '@/components/Game2048.vue'
+import GameSaolei from '@/components/GameSaolei.vue'
 </script>
 
 <template>
@@ -13,7 +14,9 @@ import Game2048 from '@/components/Game2048.vue'
       </el-col>
       <el-col :span="12">
         <!-- 扫雷 -->
-        <div class="saolei game">扫雷</div>
+        <div class="saolei game">
+          <GameSaolei />
+        </div>
       </el-col>
     </el-row>
     <el-row>

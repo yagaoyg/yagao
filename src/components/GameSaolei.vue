@@ -336,6 +336,11 @@ const switchDebug = () => {
   .debug {
     // height: 10px;
     text-align: center;
+
+    button {
+      border-radius: 5px;
+      border: 1px solid #000;
+    }
   }
 
   .main {

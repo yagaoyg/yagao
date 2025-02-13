@@ -3,7 +3,9 @@ import { ref, watch } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import HomeMuise from './HomeMuise.vue'
 import HomeText from './HomeText.vue'
+import ProjectLink from './ProjectLink.vue'
 import HomeGame from './HomeGame.vue'
+
 
 const mydiv = ref(null)
 const divIsVisible = ref(false)
@@ -35,6 +37,8 @@ watch(divIsVisible, () => {
       <HomeText />
       <!-- 音乐组件 -->
       <HomeMuise />
+      <!-- 其他项目链接 -->
+      <ProjectLink />
       <!-- mini game -->
       <HomeGame />
     </div>

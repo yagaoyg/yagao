@@ -14,11 +14,13 @@ const songs = ref([
   'Reach Me-Track in Time',
   'ALisa-Lauv I Like Me Closer (Remix)',
   'park bird-Are You Lost',
+  'Corn Wave-evening (Explicit)',
+  'Stevieboi-ɪsᴏʟᴀᴛɪᴏɴ',
   'Aimer-カタオモイ'
 ])
 
 const currSong = ref(0)
-const vol = ref(50)
+const vol = ref(30)
 const currTime = ref(0)
 const currMin = ref(0)
 const currSec = ref(0)
@@ -63,7 +65,7 @@ const reserBar = () => {
 }
 
 // 音量控制
-const changeVolume = (vol = 50) => {
+const changeVolume = (vol = 30) => {
   audio.value.volume = vol / 100
 }
 
@@ -116,7 +118,7 @@ const nextSong = async () => {
   } else {
     currSong.value++
   }
-  await changeSong(currSong.value)
+  changeSong(currSong.value)
   play()
 }
 
@@ -201,7 +203,7 @@ onMounted(() => {
         <i class="iconfont icon-yinliang" @click="volumeBtn()"></i>
         <div class="volume-bar">
           <!-- <i class="iconfont icon-minus"></i> -->
-          <input type="range" name="volume" id="" min="0" max="100" ref="volBar" @input="volBarChange()">
+          <input type="range" name="volume" id="" min="0" max="100" ref="volBar" @input="volBarChange()" v-model="vol">
           <!-- <i class="iconfont icon-add"></i> -->
         </div>
         <span class="vol">{{ vol }}</span>

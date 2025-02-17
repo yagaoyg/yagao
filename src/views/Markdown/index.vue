@@ -24,7 +24,7 @@ const mdStr = ref('')
 const getMd = (id) => {
   axios({
     method: 'get',
-    url: `http://127.0.0.1:3000/api/md/${id}`
+    url: `http://xduyg.top:3000/api/md/${id}`
   }).then((result) => {
     // console.log(result.data)
     mdStr.value = md.render(result.data)

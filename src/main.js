@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'element-plus/dist/index.css'
 import './assets/styles/var.less'
 import './assets/styles/mybase.less'
+import 'github-markdown-css/github-markdown.css'
 
 import App from './App.vue'
 import router from './router'

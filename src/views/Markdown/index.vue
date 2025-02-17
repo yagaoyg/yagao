@@ -3,9 +3,20 @@
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
+import hljs from 'highlight.js'
 import axios from 'axios'
 
-const md = new MarkdownIt('commonmark')
+const md = new MarkdownIt({
+  highlight: function (str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(str, { language: lang }).value
+      } catch (err) { console.log(err) }
+    }
+
+    return '' // use external default escaping
+  }
+})
 const route = useRoute()
 
 const mdStr = ref('')

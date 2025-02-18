@@ -10,6 +10,7 @@ import 'element-plus/dist/index.css'
 import './assets/styles/var.less'
 import './assets/styles/mybase.less'
 import 'github-markdown-css/github-markdown.css'
+import 'highlight.js/styles/github-dark.min.css'
 
 import App from './App.vue'
 import router from './router'

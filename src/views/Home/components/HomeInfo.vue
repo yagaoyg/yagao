@@ -7,7 +7,6 @@ import ProjectLink from './ProjectLink.vue'
 import HomeNote from './HomeNote.vue'
 import HomeGame from './HomeGame.vue'
 
-
 const mydiv = ref(null)
 const divIsVisible = ref(false)
 

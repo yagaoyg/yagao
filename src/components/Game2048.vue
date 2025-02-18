@@ -70,7 +70,7 @@ const getNext = (i, j, direction) => {
   }
 }
 
-// 得到下一个非零位置 [iNext, jNext,val]
+// 得到下一个非零位置 返回[iNext, jNext,val]
 const getNextNonZero = (i, j, direction) => {
   let [iNext, jNext] = getNext(i, j, direction)
   if (!isInRange(i, j)) return
@@ -109,6 +109,7 @@ const move = (direction) => {
     alert('方向无效')
     return
   }
+  // 生成新数字
   genNum()
 }
 
@@ -143,7 +144,6 @@ const isGameOver = () => {
         }
       }
     }
-    gameState.value = 'gameover'
     return true
   } else return false
 }
@@ -190,6 +190,7 @@ const pressToMove = (e) => {
 // 游戏结束处理 保存最高分等操作
 const gameOverHandler = () => {
   if (isGameOver()) {
+    gameState.value = 'gameover'
     topScoreUpdate()
   }
 }
@@ -337,21 +338,15 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        // padding-top: 10px;
-        // padding-left: 10px;
         height: 500px;
 
         .my-row {
           display: flex;
           justify-content: space-evenly;
-          // margin-bottom: 10px;
-          // width: 492px;
           height: 120px;
           background-color: #BBADA0;
 
           .cell {
-            // margin-bottom: 10px;
-            // margin-right: 10px;
             padding: 0;
             width: 112px;
             height: 112px;

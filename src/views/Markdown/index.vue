@@ -46,7 +46,13 @@ onMounted(() => {
         <div class="mkd-content">
           <div class="title">
             <h2>这里是标题</h2>
-            <p>作者、时间等信息</p>
+            <div class="info">
+              <el-icon size="20px">
+                <Clock />
+              </el-icon>
+              <div class="time">2025-02-17</div>
+              <div class="author">BY: yagao</div>
+            </div>
           </div>
           <div class="text-content markdown-body" v-html="mdStr">
           </div>
@@ -89,8 +95,19 @@ onMounted(() => {
         margin-bottom: 20px;
         border-bottom: 1px solid @wtext;
 
-        p {
-          margin-bottom: 0.5rem;
+        .info {
+          display: flex;
+          margin-bottom: 5px;
+          height: 20px;
+        }
+
+        .time {
+          margin-right: 20px;
+          line-height: 20px;
+        }
+
+        .author {
+          line-height: 20px;
         }
       }
 

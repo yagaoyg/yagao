@@ -64,6 +64,15 @@ import { RouterLink } from 'vue-router';
         </div>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :span="24">
+        <div class="more-note">
+          <RouterLink to="/md" class="more-link">
+            更多笔记 <i class="iconfont icon-arrow-right"></i>
+          </RouterLink>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -97,12 +106,11 @@ import { RouterLink } from 'vue-router';
           // color: @btext;
           text-decoration: none;
 
-          /*设置渐变的方向从左到右 颜色从ff0000到ffff00*/
+          // 设置渐变的方向从左到右 颜色从ff0000到ffff00
           background: linear-gradient(to bottom, #9c50db, #3b71dc);
+          // 将设置的背景颜色限制在文字中
           background-clip: text;
-          /*将设置的背景颜色限制在文字中*/
-          // -webkit-background-clip: text;
-          /*给文字设置成透明*/
+          // 给文字设置成透明
           -webkit-text-fill-color: transparent;
         }
       }
@@ -143,6 +151,39 @@ import { RouterLink } from 'vue-router';
       }
 
 
+    }
+  }
+
+  .more-note {
+    margin-top: 30px;
+    width: 100%;
+    height: 80px;
+
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    text-align: center;
+
+
+    .more-link {
+      font-size: 40px;
+      font-weight: bold;
+      line-height: 80px;
+      color: @btext;
+      text-decoration: none;
+
+      // 设置渐变的方向从左到右 颜色从ff0000到ffff00
+      background: linear-gradient(to bottom, #9c50db, #3b71dc);
+      // 将设置的背景颜色限制在文字中
+      background-clip: text;
+      // 给文字设置成透明
+      -webkit-text-fill-color: transparent;
+    }
+
+    .iconfont {
+      font-size: 35px;
+      font-weight: bold;
     }
   }
 }

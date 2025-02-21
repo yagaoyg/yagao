@@ -19,7 +19,7 @@
   position: relative;
   width: 100%;
   height: @window-height;
-  background-image: url(@quickback), url(@back);
+  background-image: url(@quickback);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

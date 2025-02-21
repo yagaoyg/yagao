@@ -68,7 +68,7 @@ onMounted(() => {
   padding-bottom: 60px;
   width: 100%;
   // height: 1200px;
-  min-height: 800px;
+  min-height: 1000px;
 
   background-image: url(@back);
   background-size: cover;

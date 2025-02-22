@@ -16,6 +16,7 @@ const noteData = {
   title: '测试标题',
   time: '2025 - 04 - 29',
   abstract: '测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要测试摘要',
+  imgUrl: null
 }
 
 </script>
@@ -47,7 +48,7 @@ const noteData = {
               </div>
               <div class="right">
                 <div class="img">
-                  <img src="@/assets/images/note_default.png" alt="">
+                  <img src="/images/note_default.webp" alt="">
                 </div>
               </div>
             </div>
@@ -77,7 +78,7 @@ const noteData = {
               </div>
               <div class="right">
                 <div class="img">
-                  <img src="@/assets/images/note_default.png" alt="">
+                  <img src="/images/note_default.webp" alt="">
                 </div>
               </div>
             </div>

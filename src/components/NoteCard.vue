@@ -31,7 +31,7 @@ const defaultAbstract = '这里是摘要这里是摘要这里是摘要这里是�
         </div>
         <div class="right">
           <div class="img">
-            <img :src="noteData.imgUrl || '@/assets/images/note_default.png'" alt="">
+            <img :src="noteData.imgUrl || '/images/note_default.webp'" alt="">
           </div>
         </div>
       </div>

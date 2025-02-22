@@ -28,7 +28,7 @@ import { RouterLink } from 'vue-router';
           </div>
           <div class="right">
             <div class="img">
-              <img src="@/assets/images/note_default.png" alt="">
+              <img src="/images/note_default.webp" alt="">
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ import { RouterLink } from 'vue-router';
           </div>
           <div class="right">
             <div class="img">
-              <img src="@/assets/images/note_default.png" alt="">
+              <img src="/images/note_default.webp" alt="">
             </div>
           </div>
         </div>

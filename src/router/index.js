@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/views/Layout/index.vue'
-import Home from '@/views/Home/index.vue'
-import Markdown from '@/views/Markdown/index.vue'
-import NoteList from '@/views/NoteList/index.vue'
+// import Home from '@/views/Home/index.vue'
+// import Markdown from '@/views/Markdown/index.vue'
+// import NoteList from '@/views/NoteList/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,17 +15,17 @@ const router = createRouter({
         {
           path: '',
           name: 'Home',
-          component: Home
+          component: () => import('@/views/Home/index.vue')
         },
         {
           path: '/md',
           name: 'NoteList',
-          component: NoteList
+          component: () => import('@/views/NoteList/index.vue')
         },
         {
           path: '/md/:id',
           name: 'Markdown',
-          component: Markdown,
+          component: () => import('@/views/Markdown/index.vue'),
         }
       ]
     },

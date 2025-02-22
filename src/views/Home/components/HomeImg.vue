@@ -19,7 +19,7 @@
   position: relative;
   width: 100%;
   height: @window-height;
-  background-image: url(@quickback);
+  background-image: url(@back);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -42,8 +42,6 @@
     backdrop-filter: blur(10px);
 
     text-align: center;
-    // line-height: 1.2;
-    // border: 1px solid #000;
     border-radius: 10px;
 
     animation: imgload 1.2s forwards;

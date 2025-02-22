@@ -107,7 +107,7 @@ const prevSong = async () => {
   } else {
     currSong.value--
   }
-  await changeSong(currSong.value)
+  changeSong(currSong.value)
   play()
 }
 

@@ -4,7 +4,7 @@ import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
-import '@/assets/styles/base.css'
+// import '@/assets/styles/base.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'element-plus/dist/index.css'
 import './assets/styles/var.less'

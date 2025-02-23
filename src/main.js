@@ -3,7 +3,6 @@ import { createPinia } from 'pinia'
 
 // import ElementPlus from 'element-plus'
 import { ElCol, ElRow, ElAvatar, ElText } from 'element-plus'
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 // import '@/assets/styles/base.css'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -24,9 +23,5 @@ app.use(ElCol)
 app.use(ElRow)
 app.use(ElAvatar)
 app.use(ElText)
-
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-  app.component(key, component)
-}
 
 app.mount('#app')

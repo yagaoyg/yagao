@@ -35,9 +35,7 @@ const noteData = {
                   </RouterLink>
                 </div>
                 <div class="info">
-                  <el-icon size="22px">
-                    <Clock />
-                  </el-icon>
+                  <i class="iconfont icon-time"></i>
                   <div class="time">2025 - 02 - 17</div>
                 </div>
                 <div class="abstract-content">
@@ -64,9 +62,7 @@ const noteData = {
                   </RouterLink>
                 </div>
                 <div class="info">
-                  <el-icon size="22px">
-                    <Clock />
-                  </el-icon>
+                  <i class="iconfont icon-time"></i>
                   <div class="time">2025 - 02 - 17</div>
                 </div>
                 <div class="abstract-content">
@@ -123,6 +119,7 @@ const noteData = {
       // background-color: pink;
 
       .title {
+        height: 70px;
         font-size: 50px;
 
         .link {
@@ -130,12 +127,11 @@ const noteData = {
           // color: @btext;
           text-decoration: none;
 
-          /*设置渐变的方向从左到右 颜色从ff0000到ffff00*/
+          // 设置渐变的方向从左到右 颜色从ff0000到ffff00
           background: linear-gradient(to bottom, #9c50db, #3b71dc);
+          // 将设置的背景颜色限制在文字中
           background-clip: text;
-          /*将设置的背景颜色限制在文字中*/
-          // -webkit-background-clip: text;
-          /*给文字设置成透明*/
+          // 给文字设置成透明
           -webkit-text-fill-color: transparent;
         }
       }
@@ -147,8 +143,8 @@ const noteData = {
         font-size: 18px;
         color: #535353;
 
-        .time {
-          line-height: 22px;
+        .iconfont {
+          font-size: 20px;
         }
       }
 

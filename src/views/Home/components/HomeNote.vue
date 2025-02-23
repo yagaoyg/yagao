@@ -15,9 +15,7 @@ import { RouterLink } from 'vue-router';
               </RouterLink>
             </div>
             <div class="info">
-              <el-icon size="22px">
-                <Clock />
-              </el-icon>
+              <i class="iconfont icon-time"></i>
               <div class="time">2025 - 02 - 17</div>
             </div>
             <div class="abstract-content">
@@ -44,9 +42,7 @@ import { RouterLink } from 'vue-router';
               </RouterLink>
             </div>
             <div class="info">
-              <el-icon size="22px">
-                <Clock />
-              </el-icon>
+              <i class="iconfont icon-time"></i>
               <div class="time">2025 - 02 - 17</div>
             </div>
             <div class="abstract-content">
@@ -99,6 +95,7 @@ import { RouterLink } from 'vue-router';
       // background-color: pink;
 
       .title {
+        height: 70px;
         font-size: 50px;
 
         .link {
@@ -122,8 +119,8 @@ import { RouterLink } from 'vue-router';
         font-size: 18px;
         color: #535353;
 
-        .time {
-          line-height: 22px;
+        .iconfont {
+          font-size: 20px;
         }
       }
 

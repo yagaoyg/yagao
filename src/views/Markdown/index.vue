@@ -47,9 +47,7 @@ onMounted(() => {
           <div class="title">
             <h2>这里是标题</h2>
             <div class="info">
-              <el-icon size="20px">
-                <Clock />
-              </el-icon>
+              <i class="iconfont icon-time"></i>
               <div class="time">2025-02-17</div>
               <div class="author">BY: yagao</div>
             </div>
@@ -97,13 +95,20 @@ onMounted(() => {
 
         .info {
           display: flex;
-          margin-bottom: 5px;
+          margin-bottom: 8px;
           height: 20px;
+
+          .iconfont {
+            font-size: 20px;
+
+            &::before {
+              padding-bottom: 5px;
+            }
+          }
         }
 
         .time {
           margin-right: 20px;
-          line-height: 20px;
         }
 
         .author {

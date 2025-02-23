@@ -5,7 +5,6 @@ import { createPinia } from 'pinia'
 import { ElCol, ElRow, ElAvatar, ElText } from 'element-plus'
 
 // import '@/assets/styles/base.css'
-import 'bootstrap/dist/css/bootstrap.css'
 import 'element-plus/dist/index.css'
 import './assets/styles/var.less'
 import './assets/styles/mybase.less'

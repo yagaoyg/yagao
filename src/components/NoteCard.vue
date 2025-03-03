@@ -18,9 +18,7 @@ const defaultAbstract = '这里是摘要这里是摘要这里是摘要这里是�
             </RouterLink>
           </div>
           <div class="info">
-            <el-icon size="22px">
-              <Clock />
-            </el-icon>
+            <i class="iconfont icon-time"></i>
             <div class="time">{{ noteData.time || '这里是时间' }}</div>
           </div>
           <div class="abstract-content">
@@ -83,8 +81,8 @@ const defaultAbstract = '这里是摘要这里是摘要这里是摘要这里是�
       font-size: 18px;
       color: #535353;
 
-      .time {
-        line-height: 22px;
+      .iconfont {
+        font-size: 20px;
       }
     }
 

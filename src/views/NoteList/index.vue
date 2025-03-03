@@ -19,6 +19,14 @@ const noteData = {
   imgUrl: null
 }
 
+const md2 = {
+  id: 2,
+  title: '扫雷小游戏制作',
+  time: '2025 - 02 - 29',
+  abstract: '扫雷游戏作为Windows系统标志性经典游戏，以网格探索为核心玩法，通过数字推理、雷区标记的独特机制风靡全球三十年。',
+  imgUrl: null
+}
+
 </script>
 
 <template>
@@ -80,6 +88,7 @@ const noteData = {
             </div>
           </el-col>
         </el-row>
+        <NoteCard :note-data="md2" />
         <NoteCard :note-data="noteData" />
       </div>
     </div>

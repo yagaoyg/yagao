@@ -8,7 +8,7 @@
       <el-col :span="12">
         <div class="link shop-link">
           <a href="http://shop.xduyg.top" target="_blank">
-            <img src="@/assets/images/xtx-logo.png" alt="">
+            <img src="@/assets/images/shop-logo.png" alt="">
             <div class="title">电商项目跳转 <i class="iconfont icon-direction-right"></i></div>
           </a>
         </div>

@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
-import axios from 'axios'
+import { getMd } from '@/apis/mdAPI'
 
 const md = new MarkdownIt({
   highlight: function (str, lang) {
@@ -21,20 +21,14 @@ const route = useRoute()
 
 const mdStr = ref('')
 
-const getMd = (id) => {
-  axios({
-    method: 'get',
-    url: `http://xduyg.top:3000/api/md/${id}`
-  }).then((result) => {
-    // console.log(result.data)
-    mdStr.value = md.render(result.data)
-  }).catch((err) => {
-    console.dir(err)
-  })
+const renderMd = async (id) => {
+  const tempStr = await getMd(id)
+  // console.log(tempStr)
+  mdStr.value = md.render(tempStr)
 }
 
 onMounted(() => {
-  getMd(route.params.id)
+  renderMd(route.params.id)
 })
 
 </script>

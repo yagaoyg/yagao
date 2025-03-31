@@ -345,26 +345,10 @@ onMounted(() => {
             background-color: rgb(32, 164, 204);
             box-shadow: -100vw 0 0 100vw rgb(61, 91, 100);
           }
-
-          // &::-webkit-slider-runnable-track {
-          //   height: 5px;
-          //   background: #eee;
-          //   /* 轨道背景色 */
-          //   border-radius: 5px;
-          //   /* 圆角 */
-          // }
         }
 
 
       }
-
-      // .icon-minus {
-      //   margin-right: 5px;
-      // }
-
-      // .icon-add {
-      //   margin-left: 5px;
-      // }
 
       .iconfont {
         cursor: pointer;

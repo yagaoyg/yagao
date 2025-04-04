@@ -6,6 +6,8 @@ import MarkdownIt from 'markdown-it'
 import hljs from 'highlight.js'
 import { getMd } from '@/apis/mdAPI'
 
+const mdData = ref({})
+
 const md = new MarkdownIt({
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
@@ -22,9 +24,9 @@ const route = useRoute()
 const mdStr = ref('')
 
 const renderMd = async (id) => {
-  const tempStr = await getMd(id)
+  mdData.value = await getMd(id)
   // console.log(tempStr)
-  mdStr.value = md.render(tempStr)
+  mdStr.value = md.render(mdData.value.content)
 }
 
 onMounted(() => {
@@ -37,13 +39,19 @@ onMounted(() => {
   <div class="mkd-layout">
     <el-row class="my-row">
       <el-col :xs="23" :sm="20" :md="16" :lg="16" :xl="16">
+        <div class="back-content">
+          <router-link to="/md" class="back-link">回到笔记列表</router-link>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row class="my-row">
+      <el-col :xs="23" :sm="20" :md="16" :lg="16" :xl="16">
         <div class="mkd-content">
           <div class="title">
-            <h2>这里是标题</h2>
+            <h2>{{ mdData.title }}</h2>
             <div class="info">
               <i class="iconfont icon-time"></i>
-              <div class="time">2025-02-17</div>
-              <div class="author">BY: yagao</div>
+              <div class="time">{{ mdData.time }}</div>
             </div>
           </div>
           <div class="text-content markdown-body" v-html="mdStr">
@@ -69,6 +77,30 @@ onMounted(() => {
 
   .my-row {
     justify-content: center;
+
+    .back-content {
+      margin-bottom: 20px;
+      padding: 5px;
+      width: 100%;
+
+      text-align: center;
+
+      border: 1px solid #eee;
+      border-radius: 10px;
+
+      background-color: rgba(40, 40, 40, 0.8);
+      backdrop-filter: blur(10px);
+
+      .back-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        color: @wtext;
+        font-size: 25px;
+        text-decoration: none;
+      }
+    }
 
     .mkd-content {
       padding: 20px;

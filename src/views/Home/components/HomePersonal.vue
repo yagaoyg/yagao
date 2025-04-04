@@ -16,13 +16,6 @@
             </a>
           </li>
           <li>
-            <a href="https://steamcommunity.com/id/949899039/" target="_blank">
-              <el-avatar :size="180" class="avatar"> <i class="iconfont icon-steam"></i> </el-avatar>
-              <div class="text">YAGAO 的STEAM主页</div>
-              <i class="iconfont icon-arrow-right"></i>
-            </a>
-          </li>
-          <li>
             <a href="https://github.com/yagaoyg" target="_blank">
               <el-avatar :size="180" class="avatar"> <i class="iconfont icon-GitHub"></i> </el-avatar>
               <div class="text">YAGAO 的GITHUB主页</div>
@@ -117,15 +110,6 @@
         }
 
         li:nth-child(2) {
-          background-color: #1b2838;
-          color: #1b2838;
-
-          a {
-            color: @wtext;
-          }
-        }
-
-        li:nth-child(3) {
           background-color: #010409;
 
           a {

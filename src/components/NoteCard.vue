@@ -13,7 +13,7 @@ const defaultAbstract = '这里是摘要这里是摘要这里是摘要这里是�
       <div class="note-content">
         <div class="left">
           <div class="title">
-            <RouterLink :to="`/md/${noteData.id || 404}`" class="link">
+            <RouterLink :to="`/md/${noteData.id}`" class="link">
               {{ noteData.title || '这里是文章标题' }}
             </RouterLink>
           </div>

@@ -26,6 +26,11 @@ const router = createRouter({
           path: '/md/:id',
           name: 'Markdown',
           component: () => import('@/views/Markdown/index.vue'),
+        },
+        {
+          path: 'md/upload',
+          name: 'UploadMd',
+          component: () => import('@/views/UploadMd/index.vue')
         }
       ]
     },

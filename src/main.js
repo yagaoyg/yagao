@@ -24,3 +24,12 @@ app.use(ElAvatar)
 app.use(ElText)
 
 app.mount('#app')
+
+// 百度统计
+var _hmt = _hmt || [];
+(function () {
+  var hm = document.createElement("script")
+  hm.src = "https://hm.baidu.com/hm.js?87a694452302e1f1406ba33341c52d5a"
+  var s = document.getElementsByTagName("script")[0]
+  s.parentNode.insertBefore(hm, s)
+})()
